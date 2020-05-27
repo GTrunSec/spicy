@@ -181,6 +181,10 @@ add_executable(spicy-driver bin/spicy-driver.cc)
 target_compile_options(spicy-driver PRIVATE "-Wall")
 target_link_libraries(spicy-driver PRIVATE spicy)
 
+add_executable(spicy-dump bin/spicy-dump.cc)
+target_compile_options(spicy-dump PRIVATE "-Wall")
+target_link_libraries(spicy-dump PRIVATE spicy)
+
 add_executable(spicy-doc bin/spicy-doc.cc)
 target_compile_options(spicy-doc PRIVATE "-Wall")
 target_link_libraries(spicy-doc PRIVATE spicy)
@@ -189,12 +193,6 @@ add_custom_target(spicy-build ALL)
 add_custom_command(TARGET spicy-build
                    POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/bin/spicy-build
                                                                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-
-if ( HILTI_USE_JIT )
-    add_executable(spicy-driver bin/spicy-driver.cc)
-    target_link_libraries(spicy-driver PRIVATE spicy)
-endif ()
-
 
 ## Tests
 add_executable(spicy-tests
